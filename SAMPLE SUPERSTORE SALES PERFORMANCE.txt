@@ -1,0 +1,63 @@
+SAMPLE SUPERSTORE SALES PERFORMANCE DASHBOARD CREATION PROCESS :-
+
+Objective:-
+To analyze and visualize sales performance dashboard based on :-
+1] Region, Category, Segment
+2] Profitability
+3] Discounts Impact
+4] Shipping Trends
+
+Step by Step Process
+
+STEP - 01
+Download Or Collect Dataset 
+
+STEP - 02
+Import Dataset 
+
+STEP - 03
+Data Cleaning 
+Data Types 
+2. Missing Values 
+3. Find and Replace 
+4. Sort and Filter 
+5. Data Integrity
+
+STEP - 04
+DAX Measures
+Total Sales = SUM(SampleSuperstore[Sales])
+Total Profit =SUM(SampleSuperstore[Profit])
+Total Quantity = SUM(SampeleSuperstore[Quantity])
+Profit Margin = DIVIDE(SampleSuperstore[Total Profit],SampleSuperstore[Total Sales])
+Average Discount =AVERAGE(SampleSuperstore[Discount])
+
+STEP - 05
+Dashboard Visuals :-
+
+A. KPI Cards
+1. Total Sales 
+2. Total Profit 
+3. Total Quantity
+4. Profit Margin
+
+B. Stacked Column Chart 
+1. Sales By Region
+2. Profit By Category
+3. Ship Mode Analysis
+
+C. Tree Map 
+Sales By Sub-Category
+
+D. Pie Chart 
+Segment-Wise Analysis
+
+E. Scatter Plot
+1. Discount VS Profit 
+
+STEP - 06 
+Slicers
+1. Region Slicer
+2. Ship mode Slicer
+3. Category Slicer
+4. Segment Slicer
+
