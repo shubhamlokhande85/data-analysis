@@ -1,0 +1,35 @@
+Objective
+1. Which city has the highest total sales?
+2. Which product generated the highest sales?
+3. Which category has the most orders?
+4. Which payment method is most common?
+5. Does quantity have a relationship with total sales?
+6. Which category has the highest average order value?
+7. Which are the top 5 orders by sales?
+8. What does the correlation heatmap tell you?
+
+
+Answers 
+
+1. The highest sales had Pune   169400
+2. The Laptop generated highest sale over the period, sales =  165000
+3. The Supermarket Electronic Category Have Most Orders , Electronic =  9
+4. The Online payment are Mostly common method in supermarket, Online Transactions =   9107
+5. The Sales is Lightly Dependent on Quantity, Correlation between Quantity and Total Sales =  -0.3604377654651807
+6.The Electronics category have most average order values , Electronics 42666.666666666664
+7.
+
+
+Order_ID	Date	City	Category	Product	Quantity	Unit_Price	Total_Sales	Payment_Method
+10	1011	2026-02-02	Nagpur	Electronics	Laptop	2	55000	110000	Online
+20	1021	2026-03-03	Pune	Electronics	Mobile	4	22000	88000	UPI
+0	1001	2026-01-03	Pune	Electronics	Laptop	1	55000	55000	Online
+15	1016	2026-02-15	Mumbai	Electronics	Tablet	3	18000	54000	Online
+7	1008	2026-01-20	Mumbai	Electronics	Mobile	2	22000	44000	UPI
+
+
+8.It tell us 
+- 1.  Unit Price and Sales are very much dependent on each other 
+- 2.  Quantity and Sales ae lightly dependent on each other 
+- 3.  Order Id and  Sales are weakly depenedent on each other 
+
