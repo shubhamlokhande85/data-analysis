@@ -1,0 +1,562 @@
+SQL DS PROJECT 
+
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.45 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| afternoon_db         |
+| allweatherdb         |
+| autumn               |
+| clause_db            |
+| college              |
+| condition_db         |
+| consistency          |
+| constraints_db       |
+| db                   |
+| ecommerce_store      |
+| evening_db           |
+| example_db           |
+| exists_condition     |
+| experiment           |
+| gentle_db            |
+| information_schema   |
+| join_db              |
+| key_db               |
+| level1               |
+| library              |
+| mysql                |
+| new_triggers_db      |
+| newyear_db           |
+| paradb               |
+| paradb2              |
+| paradb3              |
+| performance_schema   |
+| pydb                 |
+| r_db                 |
+| sample               |
+| sample_db            |
+| sangli               |
+| sangli_2             |
+| shopping_db          |
+| sports_db            |
+| stored_procedure_db  |
+| summer               |
+| sys                  |
+| test                 |
+| triggers_db          |
+| tuesday_db           |
+| umbrella_corporation |
+| views_db             |
+| winter               |
+| winterclauses_db     |
+| winterconstraints_db |
+| wintertriggers_db    |
+| x                    |
++----------------------+
+48 rows in set (0.05 sec)
+
+mysql> use shopping_db;
+Database changed
+mysql> show tables ;
++-----------------------+
+| Tables_in_shopping_db |
++-----------------------+
+| customers             |
+| orders                |
+| products              |
++-----------------------+
+3 rows in set (0.02 sec)
+
+mysql> select * form cutomers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form cutomers' at line 1
+mysql> select * form customers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form customers' at line 1
+mysql> select * from customers;
++-------------+---------------+---------+------------------+
+| Customer_id | customer_name | city    | email            |
++-------------+---------------+---------+------------------+
+|           1 | rahul         | pune    | rahul@gamil.com  |
+|           2 | sneha         | Mumabai | snaeha@gamil.com |
+|           3 | amit          | nashik  | amit@gmail.com   |
+|           4 | priya         | pune    | priya@gamil.com  |
++-------------+---------------+---------+------------------+
+4 rows in set (0.02 sec)
+
+mysql> select * from products ;
++------------+--------------+-------------+-----------+
+| product_id | product_name | category    | price     |
++------------+--------------+-------------+-----------+
+|        101 | laptop       | Electronics |  6000.000 |
+|        102 | Mouse        | Electronics |  1000.000 |
+|        103 | Keyboard     | Electronic  |  2500.000 |
+|        104 | Chair        | Furniture   |  8000.000 |
+|        105 | Desk         | Furniture   | 12000.000 |
++------------+--------------+-------------+-----------+
+5 rows in set (0.01 sec)
+
+mysql> select * from orders;
+Empty set (0.01 sec)
+
+mysql> des orders;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'des orders' at line 1
+mysql> desc orders;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| order_id       | int         | NO   | PRI | NULL    |       |
+| customer_id    | int         | YES  | MUL | NULL    |       |
+| order_date     | date        | YES  |     | NULL    |       |
+| payment_method | varchar(30) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into orders(order_id,customer_id,order_date,payment_method) values(1001,1,'2026-09-01','UPI');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO orders (order_id, customer_id, order_date, payment_method)
+    -> VALUES
+    -> (1001, 1, '2026-09-01', 'UPI'),
+    -> (1002, 2, '2026-09-02', 'Credit Card'),
+    -> (1003, 3, '2026-09-03', 'Cash'),
+    -> (1004, 4, '2026-09-04', 'Debit Card'),
+    -> (1005, 1, '2026-09-05', 'UPI'),
+    -> (1006, 3, '2026-09-06', 'Credit Card');
+ERROR 1062 (23000): Duplicate entry '1001' for key 'orders.PRIMARY'
+mysql> INSERT INTO orders (order_id, customer_id, order_date, payment_method)
+    -> VALUES
+    -> (1002, 2, '2026-09-02', 'Credit Card'),
+    -> (1003, 3, '2026-09-03', 'Cash'),
+    -> (1004, 4, '2026-09-04', 'Debit Card'),
+    -> (1005, 1, '2026-09-05', 'UPI'),
+    -> (1006, 3, '2026-09-06', 'Credit Card');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from orders;
++----------+-------------+------------+----------------+
+| order_id | customer_id | order_date | payment_method |
++----------+-------------+------------+----------------+
+|     1001 |           1 | 2026-09-01 | UPI            |
+|     1002 |           2 | 2026-09-02 | Credit Card    |
+|     1003 |           3 | 2026-09-03 | Cash           |
+|     1004 |           4 | 2026-09-04 | Debit Card     |
+|     1005 |           1 | 2026-09-05 | UPI            |
+|     1006 |           3 | 2026-09-06 | Credit Card    |
++----------+-------------+------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> desc customers;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| Customer_id   | int          | NO   | PRI | NULL    |       |
+| customer_name | varchar(50)  | YES  |     | NULL    |       |
+| city          | varchar(50)  | YES  |     | NULL    |       |
+| email         | varchar(100) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select city , customer_name from customers where city = "mumbai";
+Empty set (0.01 sec)
+
+mysql> select city , customer_name from customers where city = "Mumbai";
+Empty set (0.00 sec)
+
+mysql> select city , customer_name from customers where city = "Mumabai";
++---------+---------------+
+| city    | customer_name |
++---------+---------------+
+| Mumabai | sneha         |
++---------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select INSERT INTO orders (order_id, customer_id, order_date, payment_method)
+    -> VALUES
+    -> (1002, 2, '2026-09-02', 'Credit Card'),
+    -> (1003, 3, '2026-09-03', 'Cash'),
+    -> (1004, 4, '2026-09-04', 'Debit Card'),
+    -> (1005, 1, '2026-09-05', 'UPI'),
+    -> (1006, 3, '2026-09-06', 'Credit Card');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INTO orders (order_id, customer_id, order_date, payment_method)
+VALUES
+(1002, 2,' at line 1
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> desc products:
+    -> \c
+mysql> desc products;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| product_id   | int           | NO   | PRI | NULL    |       |
+| product_name | varchar(100)  | YES  |     | NULL    |       |
+| category     | varchar(50)   | YES  |     | NULL    |       |
+| price        | decimal(10,3) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select product_name , price form products where price > 5000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'products where price > 5000' at line 1
+mysql> select product_name , price from products where price > 5000;
++--------------+-----------+
+| product_name | price     |
++--------------+-----------+
+| laptop       |  6000.000 |
+| Chair        |  8000.000 |
+| Desk         | 12000.000 |
++--------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product where price desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select product_name , price from products where price desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select product_name , price from products where order by  price desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by  price desc' at line 1
+mysql> select product_name , price from products where order by price desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by price desc' at line 1
+mysql> select product_name , price from products  order by price desc;
++--------------+-----------+
+| product_name | price     |
++--------------+-----------+
+| Desk         | 12000.000 |
+| Chair        |  8000.000 |
+| laptop       |  6000.000 |
+| Keyboard     |  2500.000 |
+| Mouse        |  1000.000 |
++--------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select category, avg(price) from products group by (categoy);
+ERROR 1054 (42S22): Unknown column 'categoy' in 'group statement'
+mysql> select category, avg(price) from products group by (category);
++-------------+---------------+
+| category    | avg(price)    |
++-------------+---------------+
+| Electronics |  3500.0000000 |
+| Electronic  |  2500.0000000 |
+| Furniture   | 10000.0000000 |
++-------------+---------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from products;
++------------+--------------+-------------+-----------+
+| product_id | product_name | category    | price     |
++------------+--------------+-------------+-----------+
+|        101 | laptop       | Electronics |  6000.000 |
+|        102 | Mouse        | Electronics |  1000.000 |
+|        103 | Keyboard     | Electronic  |  2500.000 |
+|        104 | Chair        | Furniture   |  8000.000 |
+|        105 | Desk         | Furniture   | 12000.000 |
++------------+--------------+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select category , count(category) from products gorup by category;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by category' at line 1
+mysql> select category , count(category) from products gorup by (category);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by (category)' at line 1
+mysql> select category , count(category) from products group by (category);
++-------------+-----------------+
+| category    | count(category) |
++-------------+-----------------+
+| Electronics |               2 |
+| Electronic  |               1 |
+| Furniture   |               2 |
++-------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select category , count(category) from products group by category having count(category) > 1;
++-------------+-----------------+
+| category    | count(category) |
++-------------+-----------------+
+| Electronics |               2 |
+| Furniture   |               2 |
++-------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customers;
++-------------+---------------+---------+------------------+
+| Customer_id | customer_name | city    | email            |
++-------------+---------------+---------+------------------+
+|           1 | rahul         | pune    | rahul@gamil.com  |
+|           2 | sneha         | Mumabai | snaeha@gamil.com |
+|           3 | amit          | nashik  | amit@gmail.com   |
+|           4 | priya         | pune    | priya@gamil.com  |
++-------------+---------------+---------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from orders;
++----------+-------------+------------+----------------+
+| order_id | customer_id | order_date | payment_method |
++----------+-------------+------------+----------------+
+|     1001 |           1 | 2026-09-01 | UPI            |
+|     1002 |           2 | 2026-09-02 | Credit Card    |
+|     1003 |           3 | 2026-09-03 | Cash           |
+|     1004 |           4 | 2026-09-04 | Debit Card     |
+|     1005 |           1 | 2026-09-05 | UPI            |
+|     1006 |           3 | 2026-09-06 | Credit Card    |
++----------+-------------+------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select order_id, customer_name from orders reference Customer_id(customers) ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Customer_id(customers)' at line 1
+mysql> selecgt orders.order_id , customers.customer_name from orders orders join customers on customers.Customer_id = orders.customer_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecgt orders.order_id , customers.customer_name from orders orders join custom' at line 1
+mysql> selecgt orders.order_id , customers.customer_name from orders orders join customers on orders.customer_id = customers.Customer_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecgt orders.order_id , customers.customer_name from orders orders join custom' at line 1
+mysql> selecgt orders.order_id , customers.customer_name from orders join customers on orders.customer_id = customers.Customer_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecgt orders.order_id , customers.customer_name from orders join customers on ' at line 1
+mysql> select orders.order_id , customers.customer_name from orders join customers on orders.customer_id = customers.Customer_id;
++----------+---------------+
+| order_id | customer_name |
++----------+---------------+
+|     1001 | rahul         |
+|     1005 | rahul         |
+|     1002 | sneha         |
+|     1003 | amit          |
+|     1006 | amit          |
+|     1004 | priya         |
++----------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select orders.* , customers.customer_name from orders join customers on orders.customer_id = customers.Customer_id;
++----------+-------------+------------+----------------+---------------+
+| order_id | customer_id | order_date | payment_method | customer_name |
++----------+-------------+------------+----------------+---------------+
+|     1001 |           1 | 2026-09-01 | UPI            | rahul         |
+|     1005 |           1 | 2026-09-05 | UPI            | rahul         |
+|     1002 |           2 | 2026-09-02 | Credit Card    | sneha         |
+|     1003 |           3 | 2026-09-03 | Cash           | amit          |
+|     1006 |           3 | 2026-09-06 | Credit Card    | amit          |
+|     1004 |           4 | 2026-09-04 | Debit Card     | priya         |
++----------+-------------+------------+----------------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select orders.* , customers.customer_name from orders left customers on orders.customer_id = customers.Customer_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'customers on orders.customer_id = customers.Customer_id' at line 1
+mysql> select orders.* , customers.customer_name from orders left join customers on orders.customer_id = customers.Customer_id;
++----------+-------------+------------+----------------+---------------+
+| order_id | customer_id | order_date | payment_method | customer_name |
++----------+-------------+------------+----------------+---------------+
+|     1001 |           1 | 2026-09-01 | UPI            | rahul         |
+|     1002 |           2 | 2026-09-02 | Credit Card    | sneha         |
+|     1003 |           3 | 2026-09-03 | Cash           | amit          |
+|     1004 |           4 | 2026-09-04 | Debit Card     | priya         |
+|     1005 |           1 | 2026-09-05 | UPI            | rahul         |
+|     1006 |           3 | 2026-09-06 | Credit Card    | amit          |
++----------+-------------+------------+----------------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select customer.* ,orders.* from customer left join ordres on customer.Customer_id = order.customer_id;
+ERROR 1146 (42S02): Table 'shopping_db.customer' doesn't exist
+mysql> select customer.* ,orders.* from customers left join ordres on customer.Customer_id = order.customer_id;
+ERROR 1146 (42S02): Table 'shopping_db.ordres' doesn't exist
+mysql> select customers.* ,orders.* from customers left join ordres on customer.Customer_id = order.customer_id;
+ERROR 1146 (42S02): Table 'shopping_db.ordres' doesn't exist
+mysql> select customers.* ,orders.* from customers left join ordres on customer.Customer_id = orders.customer_id;
+ERROR 1146 (42S02): Table 'shopping_db.ordres' doesn't exist
+mysql> select customers.* ,orders.* from customers left join orders on customer.Customer_id = orders.customer_id;
+ERROR 1054 (42S22): Unknown column 'customer.Customer_id' in 'on clause'
+mysql> select customers.* ,orders.* from customers left join orders on customers.Customer_id = orders.customer_id;
++-------------+---------------+---------+------------------+----------+-------------+------------+----------------+
+| Customer_id | customer_name | city    | email            | order_id | customer_id | order_date | payment_method |
++-------------+---------------+---------+------------------+----------+-------------+------------+----------------+
+|           1 | rahul         | pune    | rahul@gamil.com  |     1001 |           1 | 2026-09-01 | UPI            |
+|           1 | rahul         | pune    | rahul@gamil.com  |     1005 |           1 | 2026-09-05 | UPI            |
+|           2 | sneha         | Mumabai | snaeha@gamil.com |     1002 |           2 | 2026-09-02 | Credit Card    |
+|           3 | amit          | nashik  | amit@gmail.com   |     1003 |           3 | 2026-09-03 | Cash           |
+|           3 | amit          | nashik  | amit@gmail.com   |     1006 |           3 | 2026-09-06 | Credit Card    |
+|           4 | priya         | pune    | priya@gamil.com  |     1004 |           4 | 2026-09-04 | Debit Card     |
++-------------+---------------+---------+------------------+----------+-------------+------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> delete orders from order where order_id = 4;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order where order_id = 4' at line 1
+mysql> delete orders from order where order_id =1004;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order where order_id =1004' at line 1
+mysql> delete orders from order where order_id = 1004;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order where order_id = 1004' at line 1
+mysql> delete orders from orders where order_id = 1004;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select customers.* ,orders.* from customers left join orders on customers.Customer_id = orders.customer_id;
++-------------+---------------+---------+------------------+----------+-------------+------------+----------------+
+| Customer_id | customer_name | city    | email            | order_id | customer_id | order_date | payment_method |
++-------------+---------------+---------+------------------+----------+-------------+------------+----------------+
+|           1 | rahul         | pune    | rahul@gamil.com  |     1001 |           1 | 2026-09-01 | UPI            |
+|           1 | rahul         | pune    | rahul@gamil.com  |     1005 |           1 | 2026-09-05 | UPI            |
+|           2 | sneha         | Mumabai | snaeha@gamil.com |     1002 |           2 | 2026-09-02 | Credit Card    |
+|           3 | amit          | nashik  | amit@gmail.com   |     1003 |           3 | 2026-09-03 | Cash           |
+|           3 | amit          | nashik  | amit@gmail.com   |     1006 |           3 | 2026-09-06 | Credit Card    |
+|           4 | priya         | pune    | priya@gamil.com  |     NULL |        NULL | NULL       | NULL           |
++-------------+---------------+---------+------------------+----------+-------------+------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select products.* , avg(price) from prodoucts where price > avg(price);
+ERROR 1146 (42S02): Table 'shopping_db.prodoucts' doesn't exist
+mysql> select products.* , avg(price) from products where price > avg(price);
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select products.* , avg(price) from products having price > avg(price);
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'shopping_db.products.product_id'; this is incompatible with sql_mode=only_full_group_by
+mysql> select products.* , avg(price) from products group by  having  price > avg(price);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'having  price > avg(price)' at line 1
+mysql> select products.* , avg(price) from products where price > (select avg(price) from products);
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'shopping_db.products.product_id'; this is incompatible with sql_mode=only_full_group_by
+mysql> select * from products where price > (select avg(price) from products);
++------------+--------------+-------------+-----------+
+| product_id | product_name | category    | price     |
++------------+--------------+-------------+-----------+
+|        101 | laptop       | Electronics |  6000.000 |
+|        104 | Chair        | Furniture   |  8000.000 |
+|        105 | Desk         | Furniture   | 12000.000 |
++------------+--------------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from products ;
++------------+--------------+-------------+-----------+
+| product_id | product_name | category    | price     |
++------------+--------------+-------------+-----------+
+|        101 | laptop       | Electronics |  6000.000 |
+|        102 | Mouse        | Electronics |  1000.000 |
+|        103 | Keyboard     | Electronic  |  2500.000 |
+|        104 | Chair        | Furniture   |  8000.000 |
+|        105 | Desk         | Furniture   | 12000.000 |
++------------+--------------+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select product_name, price as affordable from products where price < (select avg(price ) from products);
++--------------+------------+
+| product_name | affordable |
++--------------+------------+
+| Mouse        |   1000.000 |
+| Keyboard     |   2500.000 |
++--------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select product_name, price as medium from products where price = (select avg(price ) from products);
+Empty set (0.00 sec)
+
+mysql> select product_name, price as expensive from products where price > (select avg(price ) from products);
++--------------+-----------+
+| product_name | expensive |
++--------------+-----------+
+| laptop       |  6000.000 |
+| Chair        |  8000.000 |
+| Desk         | 12000.000 |
++--------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT
+    ->     product_name,
+    ->     price,
+    ->     CASE
+    ->         WHEN price < (SELECT AVG(price) FROM products) THEN 'Affordable'
+    ->         WHEN price = (SELECT AVG(price) FROM products) THEN 'Medium'
+    ->         WHEN price > (SELECT AVG(price) FROM products) THEN 'Expensive'
+    ->     END AS price_category
+    -> FROM products;
++--------------+-----------+----------------+
+| product_name | price     | price_category |
++--------------+-----------+----------------+
+| laptop       |  6000.000 | Expensive      |
+| Mouse        |  1000.000 | Affordable     |
+| Keyboard     |  2500.000 | Affordable     |
+| Chair        |  8000.000 | Expensive      |
+| Desk         | 12000.000 | Expensive      |
++--------------+-----------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select category , price from product order by category desc group by category ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group by category' at line 1
+mysql> select category , price from product order by category desc;
+ERROR 1146 (42S02): Table 'shopping_db.product' doesn't exist
+mysql> select category , price from products order by category desc;
++-------------+-----------+
+| category    | price     |
++-------------+-----------+
+| Furniture   |  8000.000 |
+| Furniture   | 12000.000 |
+| Electronics |  6000.000 |
+| Electronics |  1000.000 |
+| Electronic  |  2500.000 |
++-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select category , price from products order by category desc group by category ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group by category' at line 1
+mysql> SELECT
+    ->     product_name,
+    ->     category,
+    ->     price,
+    ->     RANK() OVER (
+    ->         PARTITION BY category
+    ->         ORDER BY price DESC
+    ->     ) AS price_rank
+    -> FROM products;
++--------------+-------------+-----------+------------+
+| product_name | category    | price     | price_rank |
++--------------+-------------+-----------+------------+
+| Keyboard     | Electronic  |  2500.000 |          1 |
+| laptop       | Electronics |  6000.000 |          1 |
+| Mouse        | Electronics |  1000.000 |          2 |
+| Desk         | Furniture   | 12000.000 |          1 |
+| Chair        | Furniture   |  8000.000 |          2 |
++--------------+-------------+-----------+------------+
+5 rows in set (0.01 sec)
+
+mysql> create view as data_view select * from customers;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'as data_view select * from customers' at line 1
+mysql> create view cdata_view as select * from customers;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show views;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'views' at line 1
+mysql> select * form cdata_view;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form cdata_view' at line 1
+mysql> select * from cdata_view;
++-------------+---------------+---------+------------------+
+| Customer_id | customer_name | city    | email            |
++-------------+---------------+---------+------------------+
+|           1 | rahul         | pune    | rahul@gamil.com  |
+|           2 | sneha         | Mumabai | snaeha@gamil.com |
+|           3 | amit          | nashik  | amit@gmail.com   |
+|           4 | priya         | pune    | priya@gamil.com  |
++-------------+---------------+---------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> create view joinview as select customers.customer_name , orders.* from customers join orders on customers.Customer.id = orders.customer.id;
+ERROR 1054 (42S22): Unknown column 'customers.Customer.id' in 'on clause'
+mysql> create view joinview as select customers.customer_name , orders.* from customers join orders on customers.Customer_id = orders.customer_id;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * form joinview;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form joinview' at line 1
+mysql> select * from joinview;
++---------------+----------+-------------+------------+----------------+
+| customer_name | order_id | customer_id | order_date | payment_method |
++---------------+----------+-------------+------------+----------------+
+| rahul         |     1001 |           1 | 2026-09-01 | UPI            |
+| rahul         |     1005 |           1 | 2026-09-05 | UPI            |
+| sneha         |     1002 |           2 | 2026-09-02 | Credit Card    |
+| amit          |     1003 |           3 | 2026-09-03 | Cash           |
+| amit          |     1006 |           3 | 2026-09-06 | Credit Card    |
++---------------+----------+-------------+------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql>
